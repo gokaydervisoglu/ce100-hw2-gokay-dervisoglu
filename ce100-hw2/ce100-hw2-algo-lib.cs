@@ -81,3 +81,60 @@ namespace HeapSort
         }
     }
 }
+
+namespace MatrixChainDP
+{
+    public class MatrixChainDP
+    {
+        /// <summary>
+        /// Matrix Chain Order DP is an algorithm for calculating the minimum number of
+        /// multiplications of matrix chains. This algorithm calculates the minimum 
+        /// number of products by optimizing the multiplication order of the matrices 
+        /// using dynamic programming. The algorithm runs for a variable time as the number
+        /// of matrices in the chain increases and the dimensions change. Given an array
+        /// according to the dimensions of a chain of matrices, the algorithm calculates the
+        /// minimum number of products by optimizing the product order of the matrices using
+        /// dynamic programming. In this way, the computation time does not increase as the 
+        /// number of matrices in the chain and their size increase.
+        /// </summary>
+        /// <param name="matrixSizes"></param>
+        /// <param name="size"></param>
+        /// <returns></returns>
+        public static int CalculateMinimumMultiplication(int[] matrixSizes, int size, bool enableDebug = true)
+        {
+            int[,] costMatrix = new int[size, size];
+
+            // Initial state
+            for (int i = 1; i < size; i++)
+            {
+                costMatrix[i, i] = 0;
+            }
+
+            // Calculate subchains based on chain length
+            for (int chainLength = 2; chainLength < size; chainLength++)
+            {
+                for (int i = 1; i < size - chainLength + 1; i++)
+                {
+                    int j = i + chainLength - 1;
+                    costMatrix[i, j] = int.MaxValue;
+
+                    // Find the best split point
+                    for (int k = i; k <= j - 1; k++)
+                    {
+                        int cost = costMatrix[i, k] + costMatrix[k + 1, j] + matrixSizes[i - 1] * matrixSizes[k] * matrixSizes[j];
+                        if (cost < costMatrix[i, j])
+                        {
+                            costMatrix[i, j] = cost;
+                        }
+                    }
+                    if (enableDebug)
+                    {
+                        Console.WriteLine($"costMatrix[{i},{j}] = {costMatrix[i, j]}");
+                    }
+                }
+            }
+
+            return costMatrix[1, size - 1];
+        }
+    }
+}
