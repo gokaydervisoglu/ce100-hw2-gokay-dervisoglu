@@ -139,9 +139,83 @@ namespace MatrixChainDP
     }
 }
 
+namespace MatrixChainMemoizedRecursive
+{
+    public class MatrixChainMemoizedRecursive
+    {
+        public static int[,] memo; // cache matrix
+        public static bool enableDebug = true; // debug flag
+
+        /// <summary>
+        /// Matrix Chain Memoized Recursive is an algorithm for calculating the minimum
+        /// number of multiplications of matrix chains. This algorithm speeds up computations
+        /// using dynamic programming and cache. Given an array based on the matrix chain 
+        /// dimensions, the algorithm optimizes the multiplication order of the matrices and 
+        /// calculates the minimum number of multiplications. The algorithm starts to slow down
+        /// as the number of matrices in the chain increases and the sizes change, but it doesn't
+        /// repeat the calculations using a cache, thus significantly reducing the computation time.
+        /// </summary>
+        /// <param name="p"></param>
+        /// <param name="i"></param>
+        /// <param name="j"></param>
+        /// <returns></returns>
+
+        // Calculates the minimum number of multiplications for the matrix chain
+        public static int MatrixChainOrderMemoized(int[] p, int i, int j)
+        {
+            // If debug flag is enabled, print debug information
+            if (enableDebug)
+            {
+                Console.WriteLine("MatrixChainOrderMemoized called with i=" + i + ", j=" + j);
+            }
+
+            // If the chain consists of only one matrix, no multiplication will be performed.
+            if (i == j)
+            {
+                return 0;
+            }
+
+            // Get the result from the cache matrix if there are already calculated results
+            if (memo[i, j] != 0)
+            {
+                if (enableDebug)
+                {
+                    Console.WriteLine("Memoized result used for i=" + i + ", j=" + j);
+                }
+                return memo[i, j];
+            }
+
+            // We are looking for the minimum number to minimize the number of multiplications of the matrices
+            int min = int.MaxValue;
+            for (int k = i; k < j; k++)
+            {
+                // We calculate the number of multiplications of matrices
+                int count = MatrixChainOrderMemoized(p, i, k) + MatrixChainOrderMemoized(p, k + 1, j) + p[i - 1] * p[k] * p[j];
+
+                // We update the minimum number
+                if (count < min)
+                {
+                    min = count;
+                }
+            }
+
+            // We cache the minimum number
+            memo[i, j] = min;
+
+            // If debug flag is enabled, print debug information
+            if (enableDebug)
+            {
+                Console.WriteLine("Minimum number " + min + " cached for i=" + i + ", j=" + j);
+            }
+
+            // We return the minimum number
+            return min;
+        }
+    }
+}
+
 namespace LCS
 {
-
     public static class LCSClass
     {
         /// <summary>
