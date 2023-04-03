@@ -21,7 +21,7 @@ namespace HeapSort
         /// <param name="outputArray"></param>
         /// <returns></returns>
         /// 
-        public static int[] HeapSort(int[] inputArray, int[] outputArray)
+        public static int[] HeapSort(int[] inputArray, int[] outputArray, bool enableDebug = false)
         {
             outputArray = new int[inputArray.Length];
             inputArray.CopyTo(outputArray, 0);
@@ -39,7 +39,10 @@ namespace HeapSort
                 outputArray[0] = outputArray[i];
                 outputArray[i] = change;
 
-                System.Diagnostics.Debug.WriteLine("Swapping elements: {0} and {1}", outputArray[0], outputArray[i]);
+                if (enableDebug)
+                {
+                    System.Diagnostics.Debug.WriteLine("Swapping elements: {0} and {1}", outputArray[0], outputArray[i]);
+                }
 
                 Heapify(outputArray, i, 0);
             }
@@ -54,7 +57,7 @@ namespace HeapSort
         /// <param name="arr"></param>
         /// <param name="size"></param>
         /// <param name="parent"></param>
-        private static void Heapify(int[] inputArray, int size, int parent)
+        private static void Heapify(int[] inputArray, int size, int parent, bool enableDebug = false)
         {
             int minimum = parent;
             int left = 2 * parent + 1; //left child
@@ -74,7 +77,10 @@ namespace HeapSort
                 inputArray[parent] = inputArray[minimum];
                 inputArray[minimum] = change;
 
-                System.Diagnostics.Debug.WriteLine("Swapping elements: {0} and {1}", inputArray[parent], inputArray[minimum]);
+                if (enableDebug)
+                {
+                    System.Diagnostics.Debug.WriteLine("Swapping elements: {0} and {1}", inputArray[parent], inputArray[minimum]);
+                }
 
                 Heapify(inputArray, size, minimum);
             }
@@ -100,7 +106,7 @@ namespace MatrixChainDP
         /// <param name="matrixSizes"></param>
         /// <param name="size"></param>
         /// <returns></returns>
-        public static int CalculateMinimumMultiplication(int[] matrixSizes, int size, bool enableDebug = true)
+        public static int CalculateMinimumMultiplication(int[] matrixSizes, int size, bool enableDebug = false)
         {
             int[,] costMatrix = new int[size, size];
 
@@ -144,7 +150,6 @@ namespace MatrixChainMemoizedRecursive
     public class MatrixChainMemoizedRecursive
     {
         public static int[,] memo; // cache matrix
-        public static bool enableDebug = true; // debug flag
 
         /// <summary>
         /// Matrix Chain Memoized Recursive is an algorithm for calculating the minimum
@@ -161,7 +166,7 @@ namespace MatrixChainMemoizedRecursive
         /// <returns></returns>
 
         // Calculates the minimum number of multiplications for the matrix chain
-        public static int MatrixChainOrderMemoized(int[] p, int i, int j)
+        public static int MatrixChainOrderMemoized(int[] p, int i, int j, bool enableDebug = false)
         {
             // If debug flag is enabled, print debug information
             if (enableDebug)
@@ -228,7 +233,7 @@ namespace LCS
         /// <param name="X"></param>
         /// <param name="Y"></param>
         /// <returns></returns>
-        public static int lcs(string[] X, string[] Y, bool enableDebug = true)
+        public static int lcs(string[] X, string[] Y, bool enableDebug = false)
         {
 
 
@@ -299,7 +304,7 @@ namespace LCS
         /// <param name="matrix"></param>
         /// <returns></returns>
 
-        public static int index(int[,] matrix, bool enableDebug = true)
+        public static int index(int[,] matrix, bool enableDebug = false)
         {
 
 
@@ -352,11 +357,7 @@ namespace LCS
 
                 if (enableDebug)
                 {
-
-
                     System.Diagnostics.Debug.WriteLine("i={0}, j={1} ", i, j);
-
-
                 }
             }
 
@@ -386,7 +387,7 @@ namespace KnapSack
         /// <param name="itemsCount"></param>
         /// <returns></returns>
 
-        public static int KnapSack(int capacity, int[] weight, int[] value, int itemsCount, bool enableDebug = true)
+        public static int KnapSack(int capacity, int[] weight, int[] value, int itemsCount, bool enableDebug = false)
         {
             int[,] matrix = new int[itemsCount + 1, capacity + 1];
 
