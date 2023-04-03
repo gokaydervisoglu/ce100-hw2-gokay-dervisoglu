@@ -215,3 +215,78 @@ namespace LCS
         }
     }
 }
+
+namespace KnapSack
+{
+    /// <summary>
+    /// In this scenario, we see a test in the knapSack function where the capacity is less than the weights, thus the best method.
+    /// </summary>
+
+    [TestClass]
+    public class BestKnapSackTestClass
+    {
+        [TestMethod]
+        public void KnapSacktTest()
+        {
+
+            int[] value = { 400, 300, 100, 100, 200, 500, 350, 800, 250, 1000 };
+            int[] weight = { 10, 20, 30, 25, 15, 50, 45, 70, 60, 90 };
+            int capacity = 50;
+            int itemsCount = weight.Length;
+
+            int result = KnapSackClass.KnapSack(capacity, weight, value, itemsCount, true);
+
+            int expected = 900;
+
+            Assert.AreEqual(expected, result);
+        }
+    }
+
+    /// <summary>
+    /// In this scenario we see a test where the capacity is mixed in the knapSack function, so we see the average method.
+    /// </summary>
+
+    [TestClass]
+    public class AverageKnapSackTestClass
+    {
+        [TestMethod]
+        public void KnapSacktTest()
+        {
+
+            int[] value = { 400, 300, 100, 100, 200, 500, 350, 800, 250, 1000 };
+            int[] weight = { 10, 20, 30, 25, 15, 50, 45, 70, 60, 90 };
+            int capacity = 300;
+            int itemsCount = weight.Length;
+
+            int result = KnapSackClass.KnapSack(capacity, weight, value, itemsCount, true);
+
+            int expected = 3550;
+
+            Assert.AreEqual(expected, result);
+        }
+    }
+
+    /// <summary>
+    /// In this scenario, we see a test where the capacity is more than the total weights in the knapSack function, so we see the worst method.
+    /// </summary>
+
+    [TestClass]
+    public class WorstKnapSackTestClass
+    {
+        [TestMethod]
+        public void KnapSacktTest()
+        {
+
+            int[] value = { 400, 300, 100, 100, 200, 500, 350, 800, 250, 1000 };
+            int[] weight = { 10, 20, 30, 25, 15, 50, 45, 70, 60, 90 };
+            int capacity = 400;
+            int itemsCount = weight.Length;
+
+            int result = KnapSackClass.KnapSack(capacity, weight, value, itemsCount ,true);
+
+            int expected = 3900;
+
+            Assert.AreEqual(expected, result);
+        }
+    }
+}
