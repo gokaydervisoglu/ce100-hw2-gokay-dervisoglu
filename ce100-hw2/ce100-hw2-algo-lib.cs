@@ -106,7 +106,7 @@ namespace MatrixChainDP
         /// <param name="matrixSizes"></param>
         /// <param name="size"></param>
         /// <returns></returns>
-        public static int CalculateMinimumMultiplication(int[] matrixSizes, int size, bool enableDebug = false)
+        public static int mcmdp(int[] matrixDimensionArray, int size, bool enableDebug = false)
         {
             int[,] costMatrix = new int[size, size];
 
@@ -127,7 +127,7 @@ namespace MatrixChainDP
                     // Find the best split point
                     for (int k = i; k <= j - 1; k++)
                     {
-                        int cost = costMatrix[i, k] + costMatrix[k + 1, j] + matrixSizes[i - 1] * matrixSizes[k] * matrixSizes[j];
+                        int cost = costMatrix[i, k] + costMatrix[k + 1, j] + matrixDimensionArray[i - 1] * matrixDimensionArray[k] * matrixDimensionArray[j];
                         if (cost < costMatrix[i, j])
                         {
                             costMatrix[i, j] = cost;
@@ -166,7 +166,7 @@ namespace MatrixChainMemoizedRecursive
         /// <returns></returns>
 
         // Calculates the minimum number of multiplications for the matrix chain
-        public static int MatrixChainOrderMemoized(int[] p, int i, int j, bool enableDebug = false)
+        public static int mcmrem(int[] p, int i, int j, bool enableDebug = false)
         {
             // If debug flag is enabled, print debug information
             if (enableDebug)
@@ -195,7 +195,7 @@ namespace MatrixChainMemoizedRecursive
             for (int k = i; k < j; k++)
             {
                 // We calculate the number of multiplications of matrices
-                int count = MatrixChainOrderMemoized(p, i, k) + MatrixChainOrderMemoized(p, k + 1, j) + p[i - 1] * p[k] * p[j];
+                int count = mcmrem(p, i, k) + mcmrem(p, k + 1, j) + p[i - 1] * p[k] * p[j];
 
                 // We update the minimum number
                 if (count < min)
