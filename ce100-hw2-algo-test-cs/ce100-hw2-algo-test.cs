@@ -1,5 +1,6 @@
 global using Microsoft.VisualStudio.TestTools.UnitTesting;
 using HeapSort;
+using LCS;
 
 namespace HeapSort
 {
@@ -117,4 +118,100 @@ namespace HeapSort
         }
     }
 
+}
+
+namespace LCS
+{
+    /// <summary>
+    /// In this scenario we find the longest common substring of the same two string arrays, so we see the best method.
+    /// </summary>
+
+    [TestClass]
+    public class BestLCSTestClass
+    {
+        [TestMethod]
+        public void LCSTest()
+        {
+
+            string[] X = { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z",
+            "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z",
+            "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z",
+            "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v" };
+
+            string[] Y = { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z",
+            "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z",
+            "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z",
+            "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v" };
+
+
+            int expected = 100;
+
+            int result = LCSClass.lcs(X, Y ,true);
+
+            Assert.AreEqual(expected, result);
+
+        }
+    }
+
+    /// <summary>
+    /// In this scenario we find the longest common substring of two mixed string arrays, so we see the average method.
+    /// </summary>
+
+    [TestClass]
+    public class AverageLCSTestClass
+    {
+        [TestMethod]
+        public void LCSTest()
+        {
+
+            string[] X = { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z",
+            "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z",
+            "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z",
+            "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v" };
+
+            string[] Y = { "p", "v", "t", "f", "c", "z", "n", "o", "k", "s", "y", "j", "x", "a", "b", "w", "m", "h", "u", "e", "l", "q", "i", "r", "g", "e",
+            "l", "c", "u", "n", "h", "t", "b", "x", "v", "w", "i", "p", "k", "q", "m", "y", "j", "a", "f", "z", "d", "o", "s", "r", "v", "s",
+            "z", "u", "j", "n", "d", "w", "o", "a", "e", "l", "q", "r", "t", "y", "c", "k", "m", "f", "h", "i", "x", "b", "p", "y", "q", "b",
+            "r", "c", "f", "e", "x", "k", "z", "u", "v", "n", "w", "s", "m", "a", "p", "o", "p", "r", "s", "t", "u", "v" };
+
+
+
+            int expected = 38;
+
+            int result = LCSClass.lcs(X, Y ,true);
+
+            Assert.AreEqual(expected, result);
+
+        }
+    }
+
+    /// <summary>
+    /// In this scenario, we find the longest common substring of two strings with different letters, so we see the worst method.
+    /// </summary>
+
+    [TestClass]
+    public class WorstLCSTestClass
+    {
+        [TestMethod]
+        public void LCSTest()
+        {
+
+            string[] X = { "b", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z",
+            "b", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z",
+            "b", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z",
+            "b", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v" };
+
+            string[] Y = {"a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a",
+            "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a",
+            "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a",
+            "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a"};
+
+            int expected = 0;
+
+            int result = LCSClass.lcs(X, Y, true);
+
+            Assert.AreEqual(expected, result);
+
+        }
+    }
 }
