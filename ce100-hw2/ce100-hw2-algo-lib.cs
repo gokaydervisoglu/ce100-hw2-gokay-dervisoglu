@@ -370,3 +370,116 @@ namespace LCS
         }
     }
 }
+
+namespace KnapSack
+{
+    public static class KnapSackClass
+    {
+        /// <summary>
+        /// The KnapSack function aims to place the products of the given quantity and value in the bag with the predetermined capacity at the highest value. 
+        /// Matrix table method like LCS is used in the function and value table is created with comparisons. On the table, 
+        /// we can see the maximum values that the Bag can take and etc.
+        /// </summary>
+        /// <param name="capacity"></param>
+        /// <param name="weight"></param>
+        /// <param name="value"></param>
+        /// <param name="itemsCount"></param>
+        /// <returns></returns>
+
+        public static int KnapSack(int capacity, int[] weight, int[] value, int itemsCount, bool enableDebug = true)
+        {
+            int[,] matrix = new int[itemsCount + 1, capacity + 1];
+
+            for (int i = 0; i <= itemsCount; ++i)
+            {
+                for (int w = 0; w <= capacity; ++w)
+                {
+                    if (i == 0 || w == 0)
+                        matrix[i, w] = 0;
+                    else if (weight[i - 1] <= w)
+                        matrix[i, w] = Math.Max(value[i - 1] + matrix[i - 1, w - weight[i - 1]], matrix[i - 1, w]);
+                    else
+                        matrix[i, w] = matrix[i - 1, w];
+
+                    if (enableDebug)
+                    {
+                        System.Diagnostics.Debug.WriteLine("matrix[{0}, {1}] = {2}", i, w, matrix[i, w]);
+                    }
+                }
+            }
+
+            return matrix[itemsCount, capacity];
+
+        }
+
+        /// <summary>
+        /// As with LCS, the KnapSack index function reads the general matrix table and we can see which products are selected from the index array if we want.
+        /// </summary>
+        /// <param name="capacity"></param>
+        /// <param name="weight"></param>
+        /// <param name="value"></param>
+        /// <param name="itemsCount"></param>
+
+        public static void index(int capacity, int[] weight, int[] value, int itemsCount)
+        {
+            int[,] matrix = new int[itemsCount + 1, capacity + 1];
+
+            int SizeX = matrix.GetLength(0);
+            int SizeY = matrix.GetLength(1);
+
+            for (int i = 0; i <= itemsCount; ++i)
+            {
+                for (int w = 0; w <= capacity; ++w)
+                {
+                    if (i == 0 || w == 0)
+                        matrix[i, w] = 0;
+                    else if (weight[i - 1] <= w)
+                        matrix[i, w] = Math.Max(value[i - 1] + matrix[i - 1, w - weight[i - 1]], matrix[i - 1, w]);
+                    else
+                        matrix[i, w] = matrix[i - 1, w];
+                }
+            }
+
+            int[] index = new int[itemsCount];
+
+            int j = SizeY - 1;
+            int p = -1;
+
+            for (int i = SizeX - 1; i > 0; i--)
+            {
+
+                if (matrix[i, j] > matrix[i - 1, j] && matrix[i, j] > matrix[i, j - 1])
+                {
+
+                    p++;
+
+                    index[p] = i;
+
+                    if (j == 1)
+                    {
+                        //
+                    }
+                    else
+                    {
+                        j -= weight[i - 1];
+
+                    }
+
+                }
+                else
+                {
+                    //
+                }
+
+
+            }
+
+
+            int IndexSize = index.Length - 1;
+
+            int[] newindex = index.Where(i => i != 0).ToArray();
+
+        }
+
+    }
+}
