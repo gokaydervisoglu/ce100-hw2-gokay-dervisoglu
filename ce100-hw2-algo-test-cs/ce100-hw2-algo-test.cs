@@ -1,6 +1,7 @@
 global using Microsoft.VisualStudio.TestTools.UnitTesting;
 using HeapSort;
 using LCS;
+using MatrixChainMemoizedRecursive;
 
 namespace HeapSort
 {
@@ -289,4 +290,74 @@ namespace KnapSack
             Assert.AreEqual(expected, result);
         }
     }
+}
+
+namespace MatrixChainMemoizedRecursive.Tests
+{
+    /// <summary>
+    /// tests the scenario where the chain consists of 
+    /// only one matrix and the result is expected to be 0.
+    /// </summary>
+    [TestClass]
+    public class MatrixChainMemoizedRecursiveBest
+    {
+        [TestMethod]
+        public void MatrixChainOrderMemoized_BestCase_ReturnsExpectedResult()
+        {
+
+            int[] p = { 10, 20, 30, 40, 50 };
+            MatrixChainMemoizedRecursive.memo = new int[p.Length, p.Length];
+
+
+            int result = MatrixChainMemoizedRecursive.mcmrem(p, 1, p.Length - 1);
+
+
+            Assert.AreEqual(38000, result);
+        }
+    }
+
+    /// <summary>
+    /// tests a scenario where the chain is medium size 
+    /// and the result is expected to be 38000.
+    /// </summary>
+    [TestClass]
+    public class MatrixChainMemoizedRecursiveAverage
+    {
+        [TestMethod]
+        public void MatrixChainOrderMemoized_AverageCase_ReturnsExpectedResult()
+        {
+
+            int[] p = { 10, 20, 30, 40, 50 };
+            MatrixChainMemoizedRecursive.memo = new int[p.Length, p.Length];
+
+
+            int result = MatrixChainMemoizedRecursive.mcmrem(p, 1, p.Length - 1);
+
+
+            Assert.AreEqual(38000, result);
+        }
+    }
+
+    /// <summary>
+    /// tests the worst-case scenario of the chain and
+    /// the result is expected to be 2010.
+    /// </summary>
+    [TestClass]
+    public class MatrixChainMemoizedWorst
+    {
+        [TestMethod]
+        public void MatrixChainOrderMemoized_WorstCase_ReturnsExpectedResult()
+        {
+
+            int[] p = { 5, 10, 300, 1200, 50000 };
+            MatrixChainMemoizedRecursive.memo = new int[p.Length, p.Length];
+
+
+            int result = MatrixChainMemoizedRecursive.mcmrem(p, 1, p.Length - 1);
+
+
+            Assert.AreEqual(301815000, result);
+        }
+    }
+
 }
