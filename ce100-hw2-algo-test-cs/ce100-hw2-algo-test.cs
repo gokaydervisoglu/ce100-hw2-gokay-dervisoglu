@@ -292,7 +292,7 @@ namespace KnapSack
     }
 }
 
-namespace MatrixChainMemoizedRecursive.Tests
+namespace MatrixChainMemoizedRecursive
 {
     /// <summary>
     /// tests the scenario where the chain consists of 
@@ -309,7 +309,7 @@ namespace MatrixChainMemoizedRecursive.Tests
             MatrixChainMemoizedRecursive.memo = new int[p.Length, p.Length];
 
 
-            int result = MatrixChainMemoizedRecursive.mcmrem(p, 1, p.Length - 1);
+            int result = MatrixChainMemoizedRecursive.mcmrem(p, 1, p.Length - 1,true);
 
 
             Assert.AreEqual(38000, result);
@@ -331,7 +331,7 @@ namespace MatrixChainMemoizedRecursive.Tests
             MatrixChainMemoizedRecursive.memo = new int[p.Length, p.Length];
 
 
-            int result = MatrixChainMemoizedRecursive.mcmrem(p, 1, p.Length - 1);
+            int result = MatrixChainMemoizedRecursive.mcmrem(p, 1, p.Length - 1,true);
 
 
             Assert.AreEqual(2010, result);
@@ -353,7 +353,7 @@ namespace MatrixChainMemoizedRecursive.Tests
             MatrixChainMemoizedRecursive.memo = new int[p.Length, p.Length];
 
 
-            int result = MatrixChainMemoizedRecursive.mcmrem(p, 1, p.Length - 1);
+            int result = MatrixChainMemoizedRecursive.mcmrem(p, 1, p.Length - 1, true);
 
 
             Assert.AreEqual(26000, result);
@@ -362,7 +362,7 @@ namespace MatrixChainMemoizedRecursive.Tests
 
 }
 
-namespace MatrixChainDP.Tests
+namespace MatrixChainDP
 {
     /// <summary>
     /// In this scenario, the matrix dimensions are in
@@ -379,7 +379,7 @@ namespace MatrixChainDP.Tests
             int size = matrixSizes.Length;
             int expected = 38000;
 
-            int result = MatrixChainDP.mcmdp(matrixSizes, size);
+            int result = MatrixChainDP.mcmdp(matrixSizes, size,true);
 
             Assert.AreEqual(expected, result);
         }
@@ -399,7 +399,7 @@ namespace MatrixChainDP.Tests
             int size = matrixSizes.Length;
             int expected = 301815000;
 
-            int result = MatrixChainDP.mcmdp(matrixSizes, size);
+            int result = MatrixChainDP.mcmdp(matrixSizes, size, true);
 
             Assert.AreEqual(expected, result);
         }
@@ -419,7 +419,7 @@ namespace MatrixChainDP.Tests
             int size = matrixSizes.Length;
             int expected = 26000;
 
-            int result = MatrixChainDP.mcmdp(matrixSizes, size);
+            int result = MatrixChainDP.mcmdp(matrixSizes, size, true);
 
             Assert.AreEqual(expected, result);
         }
