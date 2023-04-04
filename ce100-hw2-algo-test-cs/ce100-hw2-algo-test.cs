@@ -327,14 +327,14 @@ namespace MatrixChainMemoizedRecursive.Tests
         public void MatrixChainOrderMemoized_AverageCase_ReturnsExpectedResult()
         {
 
-            int[] p = { 10, 20, 30, 40, 50 };
+            int[] p = { 5, 10, 3, 12, 5, 50, 6 };
             MatrixChainMemoizedRecursive.memo = new int[p.Length, p.Length];
 
 
             int result = MatrixChainMemoizedRecursive.mcmrem(p, 1, p.Length - 1);
 
 
-            Assert.AreEqual(38000, result);
+            Assert.AreEqual(2010, result);
         }
     }
 
@@ -349,15 +349,79 @@ namespace MatrixChainMemoizedRecursive.Tests
         public void MatrixChainOrderMemoized_WorstCase_ReturnsExpectedResult()
         {
 
-            int[] p = { 5, 10, 300, 1200, 50000 };
+            int[] p = { 40, 20, 30, 10, 30 };
             MatrixChainMemoizedRecursive.memo = new int[p.Length, p.Length];
 
 
             int result = MatrixChainMemoizedRecursive.mcmrem(p, 1, p.Length - 1);
 
 
-            Assert.AreEqual(301815000, result);
+            Assert.AreEqual(26000, result);
         }
     }
 
+}
+
+namespace MatrixChainDP.Tests
+{
+    /// <summary>
+    /// In this scenario, the matrix dimensions are in
+    /// the form of a sequentially increasing array.
+    /// </summary>
+    [TestClass]
+    public class MatrixChainDPbest
+    {
+        [TestMethod]
+        public void TestCalculateMinimumMultiplication_BestCase()
+        {
+
+            int[] matrixSizes = { 10, 20, 30, 40, 50 };
+            int size = matrixSizes.Length;
+            int expected = 38000;
+
+            int result = MatrixChainDP.mcmdp(matrixSizes, size);
+
+            Assert.AreEqual(expected, result);
+        }
+    }
+
+    /// <summary>
+    /// In this scenario, the matrix dimensions are
+    /// given in reverse order.
+    /// </summary>
+    [TestClass]
+    public class MatrixCahinDPworst
+    {
+        [TestMethod]
+        public void TestCalculateMinimumMultiplication_WorstCase()
+        {
+            int[] matrixSizes = { 5, 10, 300, 1200, 50000 };
+            int size = matrixSizes.Length;
+            int expected = 301815000;
+
+            int result = MatrixChainDP.mcmdp(matrixSizes, size);
+
+            Assert.AreEqual(expected, result);
+        }
+    }
+
+    /// <summary>
+    /// In this scenario, the matrix sizes are given
+    /// in a random order.
+    /// </summary>
+    [TestClass]
+    public class MatrixChainDPaverage
+    {
+        [TestMethod]
+        public void TestCalculateMinimumMultiplication_AverageCase()
+        {
+            int[] matrixSizes = { 40, 20, 30, 10, 30 };
+            int size = matrixSizes.Length;
+            int expected = 26000;
+
+            int result = MatrixChainDP.mcmdp(matrixSizes, size);
+
+            Assert.AreEqual(expected, result);
+        }
+    }
 }
